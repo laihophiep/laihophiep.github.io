@@ -44,6 +44,20 @@
                 //In slug ra textbox có id “slug”
                 document.getElementById('slug').value = slug;
             }
+            function myFunction() {
+			  /* Get the text field */
+			  var copyText = document.getElementById("slug");
+
+			  /* Select the text field */
+			  copyText.select();
+			  copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+			  /* Copy the text inside the text field */
+			  document.execCommand("copy");
+
+			  /* Alert the copied text */
+			  alert("Copied the text: " + copyText.value);
+			}
         </script>
     </head>
     <body>
@@ -51,7 +65,8 @@
     		<div class="row">
 	        <form>
 	            Title : <input type="text" id="title" value="" size="50" onkeyup="ChangeToSlug();" /><br /><br />
-	            Slug : <input type="text" id="slug" value="" size="50" />
+	            Slug : <input type="text" id="slug" value="" size="50" /><button onclick="myFunction()">Copy text</button>
+
 	        </form>
         </div>
         </div>
