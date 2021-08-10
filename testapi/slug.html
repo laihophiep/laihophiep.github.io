@@ -45,6 +45,7 @@
                 document.getElementById('slug').value = slug;
             }
             function myFunction() {
+            	    event.preventDefault();
 				  var copyText = document.getElementById("slug");
 				  copyText.select();
 				  copyText.setSelectionRange(0, 99999);
@@ -55,6 +56,8 @@
 				}
 
 				function outFunc() {
+					    event.preventDefault();
+
 				  var tooltip = document.getElementById("myTooltip");
 				  tooltip.innerHTML = "Copy to clipboard";
 				}
