@@ -1,0 +1,37 @@
+<div class="col-sm-12 col-12 col-12">
+	<div class="box-link-be fix">
+		<section class="category-prd nav-link-be web-sales">
+			<li><a href="javascript:scrollToPage('web4s-intro');" class="">Giới thiệu</a></li>
+			<li><a href="javascript:scrollToPage('web4s-prd');" class="">Mẫu website</a></li>
+			<li><a href="javascript:scrollToPage('web4s-feed');" class="">Đánh giá</a></li>
+			<li><a href="javascript:scrollToPage('web4s-form');" class="">Liên hệ</a></li>
+			<li><a href="#" data-toggle="modal" data-target="#trail-register" class="show">Đăng ký dùng thử</a></li> 
+			</section>
+		</div> 
+			<script type="text/javascript">function scrollToPage(id){
+		$('html, body').animate({
+			scrollTop: $("#"+id).offset().top - 150
+		}, 800);
+	}
+	
+	
+    function scrollNav() {
+      $('.nav-link-be li>a').click(function(){  
+        //Toggle Class
+        $(".show").removeClass("show");      
+        $(this).closest('.nav-link-be li>a').addClass("show");
+        var theClass = $(this).attr("class");
+        $('.'+theClass).parent('.nav-link-be li>a').addClass('show');        
+      });
+    }
+	addLoadEvent(function () {
+		scrollNav();
+
+		$(window).scroll(function() {
+			if ($(this).scrollTop() > 500) {
+				 $('.box-link-be').addClass('fix');
+			} else {
+				 $('.box-link-be').removeClass('fix');
+			}
+		});
+	})</script> </div>
