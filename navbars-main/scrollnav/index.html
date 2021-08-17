@@ -34,4 +34,45 @@
 				 $('.box-link-be').removeClass('fix');
 			}
 		});
-	})</script> </div>
+	})</script> 
+<style type="text/css">
+	.box-link-be.fix {
+    position: fixed;
+    top: 72px;
+    width: 100%;
+    left: 0;
+    z-index: 11;
+    background: #fff;
+    margin: 0;
+}
+.nav-link-be {
+    margin: 10px auto;
+    text-align: center;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+    width: 80%;
+    border-top: 1px solid #e6e6e6;
+    border-bottom: 1px solid #e6e6e6;
+    padding: 10px 0;
+}
+.nav-link-be>li {
+    display: inline-block;
+    flex: auto;
+    border-right: 1px solid;
+}
+.nav-link-be>li>a {
+    display: block;
+    text-transform: uppercase;
+    font-size: 15px;
+    color: #000;
+    margin: 0 10px;
+}
+a, a:hover, a:focus {
+    text-decoration: none;
+    outline: none;
+}
+</style>
+</div>
