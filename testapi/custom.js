@@ -1,4 +1,4 @@
- const endpoint = 'https://api.remove.bg/v1.0';
+ const endpoint = 'https://code.junookyo.xyz/api/ncov-moh/data.json';
         const ul = document.getElementById('holidays')
 
         let bankHolidays;
