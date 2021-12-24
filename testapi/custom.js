@@ -1,4 +1,3 @@
-// Khai báo một biến, để dễ thao tác
-const endpoint = ' https://www.gov.uk/bank-holiday.json';
-// đơn giản vậy thôi.
+const endpoint = 'https://www.gov.uk/bank-holidays.json';
 fetch(endpoint)
+.then((response)=>console.log(response));
