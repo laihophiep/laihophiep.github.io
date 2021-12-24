@@ -3,10 +3,9 @@
 
         let bankHolidays;
         let england;
-        
         fetch(endpoint)
-          .then(blob => blob.json())
-.then(data => console.log(data));
+.then((response)=>console.log(response));
+        
 
           function handleDates(data) {
             bankHolidays = data;
