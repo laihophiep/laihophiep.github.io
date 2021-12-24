@@ -6,6 +6,7 @@
         
         fetch(endpoint)
           .then(blob => blob.json())
+.then(data => console.log(data));
           .then(data => handleDates(data));
 
           function handleDates(data) {
