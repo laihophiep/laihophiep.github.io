@@ -1,4 +1,4 @@
- const endpoint = 'https://www.gov.uk/bank-holidays.json';
+ const endpoint = 'https://api.remove.bg/v1.0';
         const ul = document.getElementById('holidays')
 
         let bankHolidays;
