@@ -13,6 +13,8 @@
             function ChangeToSlug()
             {
                 var title, slug;
+		    var params = new window.URLSearchParams(window.location.search);
+console.log(params.get('name'))
  
                 //Lấy text từ thẻ input title 
                 title = document.getElementById("title").value;
@@ -73,6 +75,7 @@
  						<input type="text" class="form-control" id="title" value="" size="50" onkeyup="ChangeToSlug();" />
 					    <small id="emailHelp" class="form-text text-muted">Bạn hãy paste nội dung vào để tạo slug tự động </small>
 					  </div>
+					
 					  <div class="form-group">
 					    <label for="exampleInputPassword1">Slug được tạo ra</label>
 					    <input type="text" class="form-control" id="slug" value="" size="50" />
