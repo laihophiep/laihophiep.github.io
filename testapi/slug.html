@@ -16,6 +16,11 @@
 		    var params = new window.URLSearchParams(window.location.search);
 		var slugBrand = params.get('name');
 		    console.log(slugBrand);
+		    if (slugBrand == null){
+		    	var slugBrandnew = '';	
+		    } else {
+		    	var slugBrandnew = '-'+slugBrand;
+		    	}
  
                 //Lấy text từ thẻ input title 
                 title = document.getElementById("title").value;
@@ -43,7 +48,7 @@
                 slug = slug.replace(/\-\-/gi, '-');
                 //Xóa các ký tự gạch ngang ở đầu và cuối
                 slug = '@' + slug + '@';
-                slug = slug.replace(/\@\-|\-\@|\@/gi, '') +'-'+slugBrand;
+                slug = slug.replace(/\@\-|\-\@|\@/gi, '') + slugBrandnew;
                 //In slug ra textbox có id “slug”
                 document.getElementById('slug').value = slug;
             }
