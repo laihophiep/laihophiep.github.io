@@ -2,43 +2,55 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Chuyển đổi văn bản sang không dấu</title>
-    <style>
-        body { font-family: sans-serif; padding: 20px; max-width: 600px; margin: auto; }
-        textarea { width: 100%; height: 150px; margin: 10px 0; padding: 10px; }
-        button { padding: 10px 20px; cursor: pointer; }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chuyển đổi tên file</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
 
-    <h2>Chuyển đổi tên sang không dấu</h2>
-    <textarea id="input" placeholder="Dán văn bản có dấu vào đây..."></textarea>
-    <button onclick="convert()">Chuyển đổi</button>
-    
-    <h3>Kết quả:</h3>
-    <textarea id="output" readonly></textarea>
+    <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-lg">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Đổi tên file chuẩn</h2>
+        
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-2">Nhập tên gốc:</label>
+            <textarea id="input" oninput="convert()" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition" placeholder="Ví dụ: Video Hướng Dẫn Cách Làm..."></textarea>
+        </div>
+
+        <div class="relative">
+            <label class="block text-sm font-medium text-gray-700 mb-2">Kết quả (Tên file):</label>
+            <input type="text" id="output" readonly class="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg text-blue-600 font-mono">
+            <button onclick="copyText()" class="absolute right-2 top-9 text-xs bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition">Copy</button>
+        </div>
+        
+        <p class="text-xs text-gray-400 mt-4 text-center">Tự động xóa dấu và thay khoảng trắng bằng gạch ngang (-)</p>
+    </div>
 
     <script>
         function convert() {
             let str = document.getElementById("input").value;
             
-            // Hàm loại bỏ dấu tiếng Việt
-            str = str.toLowerCase();
-            str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
-            str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
-            str = str.replace(/ì|í|ị|ỉ|ĩ/g, "i");
-            str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o");
-            str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
-            str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
-            str = str.replace(/đ/g, "d");
-            
-            // Xử lý thêm: thay thế khoảng trắng bằng dấu gạch ngang (thường dùng cho tên file)
-            str = str.replace(/\s+/g, '-');
-            
-            // Loại bỏ các ký tự đặc biệt nếu muốn (tùy chọn)
-            str = str.replace(/[^a-z0-9\-]/g, '');
+            // Xử lý loại bỏ dấu
+            str = str.toLowerCase()
+                .replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a")
+                .replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e")
+                .replace(/ì|í|ị|ỉ|ĩ/g, "i")
+                .replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o")
+                .replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u")
+                .replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y")
+                .replace(/đ/g, "d")
+                .replace(/[^a-z0-9\s-]/g, '') // Xóa ký tự lạ
+                .replace(/\s+/g, '-')         // Thay khoảng trắng bằng gạch ngang
+                .replace(/-+/g, '-')          // Xóa nhiều gạch ngang liên tiếp
+                .replace(/^-+|-+$/g, '');     // Xóa gạch ngang ở đầu và cuối
 
             document.getElementById("output").value = str;
+        }
+
+        function copyText() {
+            const output = document.getElementById("output");
+            output.select();
+            document.execCommand("copy");
+            alert("Đã sao chép tên file!");
         }
     </script>
 </body>
