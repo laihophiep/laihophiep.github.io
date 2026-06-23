@@ -5,8 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chuyển đổi tên file</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Hiệu ứng trượt cho thông báo */
+        #toast {
+            transition: opacity 0.3s, transform 0.3s;
+        }
+    </style>
 </head>
 <body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed top-5 bg-green-500 text-white px-6 py-3 rounded-full shadow-lg transform -translate-y-20 opacity-0 transition-all">
+        Đã sao chép vào bộ nhớ đệm!
+    </div>
 
     <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-lg">
         <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Đổi tên file chuẩn</h2>
@@ -22,14 +33,13 @@
             <button onclick="copyText()" class="absolute right-2 top-9 text-xs bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition">Copy</button>
         </div>
         
-        <p class="text-xs text-gray-400 mt-4 text-center">Tự động xóa dấu và thay khoảng trắng bằng gạch ngang (-)</p>
+        <p class="text-xs text-gray-400 mt-4 text-center">Tự động xóa dấu và định dạng chuẩn cho file</p>
     </div>
 
     <script>
         function convert() {
             let str = document.getElementById("input").value;
             
-            // Xử lý loại bỏ dấu
             str = str.toLowerCase()
                 .replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a")
                 .replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e")
@@ -38,19 +48,31 @@
                 .replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u")
                 .replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y")
                 .replace(/đ/g, "d")
-                .replace(/[^a-z0-9\s-]/g, '') // Xóa ký tự lạ
-                .replace(/\s+/g, '-')         // Thay khoảng trắng bằng gạch ngang
-                .replace(/-+/g, '-')          // Xóa nhiều gạch ngang liên tiếp
-                .replace(/^-+|-+$/g, '');     // Xóa gạch ngang ở đầu và cuối
+                .replace(/[^a-z0-9\s-]/g, '')
+                .replace(/\s+/g, '-')
+                .replace(/-+/g, '-')
+                .replace(/^-+|-+$/g, '');
 
             document.getElementById("output").value = str;
         }
 
         function copyText() {
             const output = document.getElementById("output");
+            if (!output.value) return; // Không làm gì nếu input trống
+
             output.select();
             document.execCommand("copy");
-            alert("Đã sao chép tên file!");
+
+            // Hiển thị thông báo Toast
+            const toast = document.getElementById("toast");
+            toast.classList.remove("-translate-y-20", "opacity-0");
+            toast.classList.add("translate-y-0", "opacity-100");
+
+            // Ẩn thông báo sau 2 giây
+            setTimeout(() => {
+                toast.classList.remove("translate-y-0", "opacity-100");
+                toast.classList.add("-translate-y-20", "opacity-0");
+            }, 2000);
         }
     </script>
 </body>
