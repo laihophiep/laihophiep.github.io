@@ -20,7 +20,6 @@
 
         /* =========================================
            CSS CHO TOOL 2 (STICKER TIKTOK)
-           (Đã thêm tiền tố .tab-sticker-scope để không ảnh hưởng Tool 1)
            ========================================= */
         .tab-sticker-scope {
             display: flex;
@@ -107,29 +106,72 @@
             align-items: center;
         }
 
-        .tab-sticker-scope .sticker-container { background-color: transparent; padding: 10px; }
+        /* KHU VỰC ĐƯỢC CHỤP ẢNH */
+        .tab-sticker-scope .sticker-container { 
+            background-color: transparent; 
+            padding: 24px; /* Tăng padding để không cắt mất cái đuôi và viền bóng */
+        }
 
         .tab-sticker-scope .tiktok-sticker {
-            background: #ffffff; padding: 14px 16px; border-radius: 12px; width: 280px; position: relative; box-shadow: 0 2px 15px rgba(0,0,0,0.1); display: flex; gap: 12px; border-bottom-left-radius: 4px; 
+            background: #ffffff; 
+            padding: 14px 16px; 
+            border-radius: 12px; 
+            width: 280px; 
+            position: relative; 
+            /* Thêm viền mỏng và bóng để khung luôn hiện rõ kể cả trên nền trắng */
+            border: 1px solid rgba(0,0,0,0.06);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1); 
+            display: flex; 
+            gap: 12px; 
+            border-bottom-left-radius: 4px; 
         }
 
         .tab-sticker-scope .sticker-tail {
-            position: absolute; bottom: -13px; left: 0px; width: 24px; height: 18px;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 18' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0 V12 C0 15 2 17 4 16 L18 0 H0 Z' fill='white'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
+            position: absolute; 
+            bottom: -15px; 
+            left: -1px; 
+            width: 24px; 
+            height: 18px;
+        }
+        .tab-sticker-scope .sticker-tail svg {
+            width: 100%;
+            height: 100%;
+            display: block;
         }
 
         .tab-sticker-scope .left-col { display: flex; flex-direction: column; align-items: center; }
-        .tab-sticker-scope .avatar { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; background: #e0e0e0; }
+        
+        .tab-sticker-scope .avatar { 
+            min-width: 40px; 
+            min-height: 40px; 
+            width: 40px; 
+            height: 40px; 
+            border-radius: 50%; 
+            object-fit: cover; 
+            background: #e0e0e0; 
+        }
+
         .tab-sticker-scope .right-col { display: flex; flex-direction: column; flex: 1; }
         
-        .tab-sticker-scope .sticker-header { color: #73747b; font-size: 13px; font-weight: 600; margin-bottom: 4px; }
-        .tab-sticker-scope .main-text { color: #000000; font-size: 16px; font-weight: 700; line-height: 1.35; word-wrap: break-word; }
+        .tab-sticker-scope .sticker-header { 
+            color: #73747b; 
+            font-size: 13px; 
+            font-weight: 600; 
+            margin-bottom: 4px; 
+        }
+        
+        .tab-sticker-scope .main-text { 
+            color: #000000; 
+            font-size: 16px; 
+            font-weight: 700; 
+            line-height: 1.35; 
+            word-wrap: break-word; 
+        }
     </style>
 </head>
 <body class="bg-gray-900 min-h-screen font-sans flex flex-col items-center py-10 px-4">
 
-    <!-- Toast Notification (Dùng chung) -->
+    <!-- Toast Notification -->
     <div id="toast" class="fixed top-5 bg-green-500 text-white px-6 py-3 rounded-full shadow-lg transform -translate-y-20 opacity-0">
         Đã sao chép vào bộ nhớ đệm!
     </div>
@@ -144,35 +186,27 @@
         </button>
     </div>
 
-    <!-- ==============================================
-         TAB 1: ĐỔI TÊN FILE
-         ============================================== -->
+    <!-- TAB 1: ĐỔI TÊN FILE -->
     <div id="tab-1" class="w-full flex justify-center transition-all duration-500">
         <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-lg">
             <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Đổi tên file chuẩn</h2>
-            
             <div class="mb-4">
                 <label class="block text-sm font-medium text-gray-700 mb-2">Nhập tên gốc:</label>
                 <textarea id="input-rename" oninput="convertFileName()" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition" placeholder="Ví dụ: Video Hướng Dẫn Cách Làm..."></textarea>
             </div>
-
             <div class="relative">
                 <label class="block text-sm font-medium text-gray-700 mb-2">Kết quả (Tên file):</label>
                 <input type="text" id="output-rename" readonly class="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg text-blue-600 font-mono">
                 <button onclick="copyFileName()" class="absolute right-2 top-9 text-xs bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition">Copy</button>
             </div>
-            
             <p class="text-xs text-gray-400 mt-4 text-center">Tự động xóa dấu và định dạng chuẩn cho file</p>
         </div>
     </div>
 
-    <!-- ==============================================
-         TAB 2: TẠO STICKER TIKTOK
-         ============================================== -->
+    <!-- TAB 2: TẠO STICKER TIKTOK -->
     <div id="tab-2" class="w-full hidden transition-all duration-500">
         <div class="tab-sticker-scope">
             
-            <!-- Cột Điều Khiển -->
             <div class="controls-box">
                 <h3 class="text-xl font-bold mb-4">Tùy chỉnh Sticker</h3>
                 
@@ -182,10 +216,10 @@
                 </div>
 
                 <label>Tên người dùng</label>
-                <input type="text" id="input-username" value="username" oninput="updateStickerPreview()">
+                <input type="text" id="input-username" value="dankit" oninput="updateStickerPreview()">
 
                 <label>Nội dung bình luận</label>
-                <textarea id="input-text" rows="4" oninput="updateStickerPreview()">Video này thú vị quá! 😋</textarea>
+                <textarea id="input-text" rows="4" oninput="updateStickerPreview()">Em uống dâu đều thì dùng loại nào được ạ</textarea>
 
                 <label>Giới tính Avatar (Dành cho AI)</label>
                 <select id="input-gender">
@@ -202,48 +236,52 @@
                 
                 <button class="st-btn btn-ai" id="btn-ai" onclick="generateAIAvatar()">✨ Tạo Avatar AI</button>
                 <button class="st-btn btn-download" onclick="downloadSticker()">⬇️ Tải xuống PNG trong suốt</button>
+                <p class="text-xs text-gray-400 mt-2 italic text-center">Mẹo: Ảnh PNG trong suốt khi xem trên máy tính nền trắng có thể hòa vào nền. Kéo vào phần mềm dựng video sẽ hiện rõ.</p>
             </div>
 
-            <!-- Cột Xem Trước -->
             <div class="preview-wrapper">
                 <h3 class="text-xl font-bold mb-4">Xem trước Sticker</h3>
                 <div class="transparent-bg">
+                    
                     <div id="capture-area" class="sticker-container">
                         <div class="tiktok-sticker">
-                            <div class="sticker-tail"></div>
+                            <!-- Đuôi sticker nhúng trực tiếp bằng SVG để Html2Canvas bắt buộc phải vẽ -->
+                            <div class="sticker-tail">
+                                <svg viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M0 0 V12 C0 15 2 17 4 16 L18 0 H0 Z" fill="white"/>
+                                </svg>
+                            </div>
+                            
                             <div class="left-col">
-                                <img id="preview-avatar" class="avatar" crossorigin="anonymous" src="https://api.dicebear.com/7.x/avataaars/png?seed=AsianFace" alt="Avatar">
+                                <img id="preview-avatar" class="avatar" crossorigin="anonymous" src="https://image.pollinations.ai/prompt/portrait%20of%20a%20young%20asian%20woman%20face,%20beautiful,%20natural%20lighting,%20tiktok%20profile%20picture%20style?width=200&height=200&nologo=true&seed=123" alt="Avatar">
                             </div>
                             <div class="right-col">
                                 <div class="sticker-header">
-                                    Trả lời bình luận của <span id="preview-username">username</span>
+                                    Trả lời bình luận của <span id="preview-username">dankit</span>
                                 </div>
                                 <div id="preview-text" class="main-text">
-                                    Video này thú vị quá! 😋
+                                    Em uống dâu đều thì dùng loại nào được ạ
                                 </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
 
         </div>
     </div>
 
-    <!-- ==============================================
-         JAVASCRIPT CHUNG YẾU
-         ============================================== -->
+    <!-- SCRIPT XỬ LÝ -->
     <script>
-        // HÀM CHUYỂN ĐỔI TAB (TABS LOGIC)
+        // HÀM CHUYỂN ĐỔI TAB
         function switchTab(tabIndex) {
             const tab1 = document.getElementById('tab-1');
             const tab2 = document.getElementById('tab-2');
             const nav1 = document.getElementById('nav-tab-1');
             const nav2 = document.getElementById('nav-tab-2');
             
-            // Lớp CSS mặc định khi Tab KHÔNG được chọn
             const inactiveClass = "px-6 py-2.5 rounded-lg font-bold text-sm transition-all duration-300 text-gray-400 hover:text-white hover:bg-gray-700";
-            // Lớp CSS khi Tab ĐƯỢC chọn
             const activeClass = "px-6 py-2.5 rounded-lg font-bold text-sm transition-all duration-300 bg-blue-600 text-white shadow-md";
 
             if (tabIndex === 1) {
@@ -259,9 +297,7 @@
             }
         }
 
-        // ==============================================
-        // SCRIPT CHO TAB 1 (ĐỔI TÊN FILE)
-        // ==============================================
+        // TOOL 1: ĐỔI TÊN FILE
         function convertFileName() {
             let str = document.getElementById("input-rename").value;
             str = str.toLowerCase()
@@ -297,9 +333,7 @@
             }, 2000);
         }
 
-        // ==============================================
-        // SCRIPT CHO TAB 2 (STICKER TIKTOK)
-        // ==============================================
+        // TOOL 2: STICKER TIKTOK
         function updateStickerPreview() {
             document.getElementById('preview-username').innerText = document.getElementById('input-username').value;
             document.getElementById('preview-text').innerText = document.getElementById('input-text').value;
@@ -394,5 +428,4 @@
         }
     </script>
 </body>
-    <footer><center><span style="color:#cccc;padding:20px">Bản quyền thuộc về Mr.Hiệp</span></center></footer>
 </html>
