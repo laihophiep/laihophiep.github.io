@@ -138,19 +138,21 @@
             border-radius: 12px; 
             width: 280px; 
             position: relative; 
-            border: 1px solid rgba(0,0,0,0.06);
-            box-shadow: 0 4px 16px rgba(0,0,0,0.1); 
+            /* Bỏ viền (border), chỉ dùng bóng nhẹ để hòa quyện phần đuôi */
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08); 
             display: flex; 
             gap: 12px; 
-            border-bottom-left-radius: 4px; 
+            border-bottom-left-radius: 2px; /* Góc trái dưới vuông vức hơn để hợp đuôi */
         }
 
         .tab-sticker-scope .sticker-tail {
             position: absolute; 
-            bottom: -15px; 
-            left: -1px; 
+            /* Hạ đuôi xuống 16px, nhưng chiều cao 18px nên sẽ CẮN VÀO khung 2px */
+            bottom: -16px; 
+            left: 0px; 
             width: 24px; 
             height: 18px;
+            z-index: 10; /* Rất quan trọng: Phải đè lên khung để che lấp vết nối */
         }
         
         .tab-sticker-scope .sticker-tail svg {
