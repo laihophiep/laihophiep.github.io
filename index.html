@@ -76,12 +76,32 @@
         .tab-sticker-scope .upload-box input[type="file"] { display: none; }
         
         .tab-sticker-scope .upload-btn-custom {
-            display: inline-block; width: 100%; padding: 10px; background: #444; color: white; text-align: center; border-radius: 6px; cursor: pointer; box-sizing: border-box; font-weight: 600; font-size: 14px; border: 1px solid #555; transition: 0.2s;
+            display: inline-block; 
+            width: 100%; 
+            padding: 10px; 
+            background: #444; 
+            color: white; 
+            text-align: center; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            box-sizing: border-box; 
+            font-weight: 600; 
+            font-size: 14px; 
+            border: 1px solid #555; 
+            transition: 0.2s;
         }
         .tab-sticker-scope .upload-btn-custom:hover { background: #555; }
 
         .tab-sticker-scope .st-btn {
-            width: 100%; padding: 12px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; margin-bottom: 10px; transition: 0.2s; font-size: 15px;
+            width: 100%; 
+            padding: 12px; 
+            border: none; 
+            border-radius: 6px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            margin-bottom: 10px; 
+            transition: 0.2s; 
+            font-size: 15px;
         }
         .tab-sticker-scope .btn-ai { background: #1a73e8; color: white; }
         .tab-sticker-scope .btn-ai:hover { background: #1557b0; }
@@ -109,7 +129,7 @@
         /* KHU VỰC ĐƯỢC CHỤP ẢNH */
         .tab-sticker-scope .sticker-container { 
             background-color: transparent; 
-            padding: 24px; /* Tăng padding để không cắt mất cái đuôi và viền bóng */
+            padding: 24px; 
         }
 
         .tab-sticker-scope .tiktok-sticker {
@@ -118,7 +138,6 @@
             border-radius: 12px; 
             width: 280px; 
             position: relative; 
-            /* Thêm viền mỏng và bóng để khung luôn hiện rõ kể cả trên nền trắng */
             border: 1px solid rgba(0,0,0,0.06);
             box-shadow: 0 4px 16px rgba(0,0,0,0.1); 
             display: flex; 
@@ -133,13 +152,18 @@
             width: 24px; 
             height: 18px;
         }
+        
         .tab-sticker-scope .sticker-tail svg {
             width: 100%;
             height: 100%;
             display: block;
         }
 
-        .tab-sticker-scope .left-col { display: flex; flex-direction: column; align-items: center; }
+        .tab-sticker-scope .left-col { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+        }
         
         .tab-sticker-scope .avatar { 
             min-width: 40px; 
@@ -151,7 +175,11 @@
             background: #e0e0e0; 
         }
 
-        .tab-sticker-scope .right-col { display: flex; flex-direction: column; flex: 1; }
+        .tab-sticker-scope .right-col { 
+            display: flex; 
+            flex-direction: column; 
+            flex: 1; 
+        }
         
         .tab-sticker-scope .sticker-header { 
             color: #73747b; 
@@ -245,7 +273,6 @@
                     
                     <div id="capture-area" class="sticker-container">
                         <div class="tiktok-sticker">
-                            <!-- Đuôi sticker nhúng trực tiếp bằng SVG để Html2Canvas bắt buộc phải vẽ -->
                             <div class="sticker-tail">
                                 <svg viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M0 0 V12 C0 15 2 17 4 16 L18 0 H0 Z" fill="white"/>
@@ -253,7 +280,7 @@
                             </div>
                             
                             <div class="left-col">
-                                <img id="preview-avatar" class="avatar" crossorigin="anonymous" src="https://image.pollinations.ai/prompt/portrait%20of%20a%20young%20asian%20woman%20face,%20beautiful,%20natural%20lighting,%20tiktok%20profile%20picture%20style?width=200&height=200&nologo=true&seed=123" alt="Avatar">
+                                <img id="preview-avatar" class="avatar" crossorigin="anonymous" src="https://image.pollinations.ai/prompt/portrait%20of%20a%20young%20asian%20woman%20face,%20beautiful,%20natural%20lighting,%20tiktok%20profile%20picture%20style?width=200&amp;height=200&amp;nologo=true&amp;seed=123" alt="Avatar">
                             </div>
                             <div class="right-col">
                                 <div class="sticker-header">
@@ -274,7 +301,6 @@
 
     <!-- SCRIPT XỬ LÝ -->
     <script>
-        // HÀM CHUYỂN ĐỔI TAB
         function switchTab(tabIndex) {
             const tab1 = document.getElementById('tab-1');
             const tab2 = document.getElementById('tab-2');
@@ -297,7 +323,7 @@
             }
         }
 
-        // TOOL 1: ĐỔI TÊN FILE
+        // TOOL 1
         function convertFileName() {
             let str = document.getElementById("input-rename").value;
             str = str.toLowerCase()
@@ -308,10 +334,10 @@
                 .replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u")
                 .replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y")
                 .replace(/đ/g, "d")
-                .replace(/[^a-z0-9\s-]/g, '')
-                .replace(/\s+/g, '-')
-                .replace(/-+/g, '-')
-                .replace(/^-+|-+$/g, '');
+                .replace(/[^a-z0-9\s-]/g, "")
+                .replace(/\s+/g, "-")
+                .replace(/-+/g, "-")
+                .replace(/^-+|-+$/g, "");
 
             document.getElementById("output-rename").value = str;
         }
@@ -333,7 +359,7 @@
             }, 2000);
         }
 
-        // TOOL 2: STICKER TIKTOK
+        // TOOL 2
         function updateStickerPreview() {
             document.getElementById('preview-username').innerText = document.getElementById('input-username').value;
             document.getElementById('preview-text').innerText = document.getElementById('input-text').value;
@@ -345,7 +371,7 @@
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     document.getElementById('preview-avatar').src = e.target.result;
-                }
+                };
                 reader.readAsDataURL(file);
             }
         }
