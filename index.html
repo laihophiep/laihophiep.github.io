@@ -220,6 +220,7 @@
   body.preset-browser      { --bg:#001414; --surface:#002424; --surface2:#002e2e; --surface3:#003838; --border:#005050; --accent1:#00e5cc; --accent2:#40c4ff; }
   body.preset-gaming       { --bg:#060f02; --surface:#0c1c04; --surface2:#102306; --surface3:#142b08; --border:#1e4209; --accent1:#b4ff00; --accent2:#00d4aa; }
   body.preset-excel        { --bg:#021008; --surface:#041e0e; --surface2:#062614; --surface3:#082e18; --border:#0c4824; --accent1:#00e676; --accent2:#40c4ff; }
+        body.preset-capcut       { --bg:#0b0d17; --surface:#151828; --surface2:#1e2238; --surface3:#282d48; --border:#3d456b; --accent1:#ffffff; --accent2:#3b82f6; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 20px; }
 
@@ -984,6 +985,7 @@
       <div class="preset-item" onclick="loadPreset('browser')"><h4>🌐 Browser Navigation</h4><p>New Tab, Close, Refresh, Back, Forward, Dev Tools · Knob = Back/Fwd</p></div>
       <div class="preset-item" onclick="loadPreset('gaming')"><h4>🎮 Gaming Macros</h4><p>Push-to-Talk, Mute Mic, Screenshot, Clip · Knob = Volume</p></div>
       <div class="preset-item" onclick="loadPreset('excel')"><h4>📊 MS Excel</h4><p>Undo, Redo, AutoSum, Format, Filter, Fill Down · Knob = Scroll Left/Right</p></div>
+        <div class="preset-item" onclick="loadPreset('capcut')"><h4>✂️ CapCut / Edit Video</h4><p>Split, Del Left/Right, Undo · Knob = Zoom Timeline</p></div>
     </div>
     <button class="overlay-close" onclick="document.getElementById('overlay').classList.remove('open')">Cancel</button>
   </div>
@@ -1207,7 +1209,7 @@ const STORAGE_KEY = 'macro-keypad-standalone-v1';
 const PRESET_THEMES = {
   media:'preset-media', productivity:'preset-productivity',
   photoshop:'preset-photoshop', browser:'preset-browser',
-  gaming:'preset-gaming', excel:'preset-excel'
+  gaming:'preset-gaming', excel:'preset-excel',capcut:'preset-capcut' // <--- Thêm dòng này
 };
 function applyPresetTheme(name) {
   document.body.className = document.body.className.replace(/\bpreset-\S+/g, '').trim();
@@ -1239,6 +1241,17 @@ const PRESETS = {
   browser:     {K1:{type:'shortcut',label:'New Tab',shortcut:{mods:['Ctrl'],key:'T'}},K2:{type:'shortcut',label:'Close Tab',shortcut:{mods:['Ctrl'],key:'W'}},K3:{type:'shortcut',label:'Refresh',shortcut:{mods:['Ctrl'],key:'R'}},K4:{type:'shortcut',label:'Back',shortcut:{mods:['Alt'],key:'Left'}},K5:{type:'shortcut',label:'Forward',shortcut:{mods:['Alt'],key:'Right'}},K6:{type:'shortcut',label:'Dev Tools',shortcut:{mods:[],key:'F12'}},'knob-left':{type:'shortcut',label:'Back',shortcut:{mods:['Alt'],key:'Left'}},'knob-right':{type:'shortcut',label:'Forward',shortcut:{mods:['Alt'],key:'Right'}},'knob-click':{type:'shortcut',label:'Refresh',shortcut:{mods:['Ctrl'],key:'R'}}},
   gaming:      {K1:{type:'shortcut',label:'PTT',shortcut:{mods:[],key:'CapsLock'}},K2:{type:'media',label:'Mute Mic',media:'mute'},K3:{type:'shortcut',label:'Screenshot',shortcut:{mods:[],key:'F12'}},K4:{type:'shortcut',label:'NV Clip',shortcut:{mods:['Alt'],key:'F10'}},K5:{type:'shortcut',label:'NV Share',shortcut:{mods:['Alt'],key:'Z'}},K6:{type:'shortcut',label:'Scoreboard',shortcut:{mods:[],key:'Tab'}},'knob-left':{type:'media',label:'Vol –',media:'vol_down'},'knob-right':{type:'media',label:'Vol +',media:'vol_up'},'knob-click':{type:'media',label:'Mute',media:'mute'}},
   excel:       {K1:{type:'shortcut',label:'Undo',shortcut:{mods:['Ctrl'],key:'Z'}},K2:{type:'shortcut',label:'Redo',shortcut:{mods:['Ctrl'],key:'Y'}},K3:{type:'shortcut',label:'AutoSum',shortcut:{mods:['Alt'],key:'='}},K4:{type:'shortcut',label:'Format',shortcut:{mods:['Ctrl'],key:'1'}},K5:{type:'shortcut',label:'Filter',shortcut:{mods:['Ctrl','Shift'],key:'L'}},K6:{type:'shortcut',label:'Fill Down',shortcut:{mods:['Ctrl'],key:'D'}},'knob-left':{type:'shortcut',label:'Scroll ←',shortcut:{mods:['Alt'],key:'Page Down'}},'knob-right':{type:'shortcut',label:'Scroll →',shortcut:{mods:['Alt'],key:'Page Up'}},'knob-click':{type:'shortcut',label:'Sel All',shortcut:{mods:['Ctrl'],key:'A'}}},
+    capcut:      {
+    K1:{type:'shortcut',label:'Split',shortcut:{mods:['Ctrl'],key:'B'}},
+    K2:{type:'shortcut',label:'Del Left',shortcut:{mods:[],key:'Q'}},
+    K3:{type:'shortcut',label:'Del Right',shortcut:{mods:[],key:'W'}},
+    K4:{type:'shortcut',label:'Undo',shortcut:{mods:['Ctrl'],key:'Z'}},
+    K5:{type:'shortcut',label:'Select',shortcut:{mods:[],key:'A'}},
+    K6:{type:'shortcut',label:'Split All',shortcut:{mods:['Ctrl','Shift'],key:'B'}},
+    'knob-left':{type:'shortcut',label:'Zoom Out',shortcut:{mods:['Ctrl'],key:'-'}},
+    'knob-right':{type:'shortcut',label:'Zoom In',shortcut:{mods:['Ctrl'],key:'='}},
+    'knob-click':{type:'shortcut',label:'Play/Pause',shortcut:{mods:[],key:'Space'}}
+  },
 };
 
 // ══════════════════════════════════════════════
